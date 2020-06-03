@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 import textwrap
 # Declare all the rooms
 
@@ -38,17 +39,19 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-current_location = room['outside']
+player = Player("Tom", room['outside'])
+current_location = player.current_room
 game_on = True
 # Write a loop that:
 while game_on:
     # * Prints the current room name
-    print("You are at", current_location)
-    # * Prints the current description (the textwrap module might be useful here).
-    # Wrap this text.
-    wrapper = textwrap.TextWrapper(width=100)
-    word_list = wrapper.wrap(text=current_location.description)
-    print(word_list)
+    print(f"{player.name}, you are at {current_location.name}")
+    # # * Prints the current description (the textwrap module might be useful here).
+    # # Wrap this text.
+    if current_location is not None:
+        wrapper = textwrap.TextWrapper(width=100)
+        word_list = wrapper.wrap(text=current_location.description)
+        print(word_list)
     # * Waits for user input and decides what to do.
     direction = input("select a direction: ")
     direction = direction.lower()
@@ -56,7 +59,7 @@ while game_on:
     # if direction == 'north'
     if direction == 'n':
         # if no more room:
-        if current_location.name == 'Grand Overlook':
+        if current_location.n_to is None:
             print("!!!!no more room this way!!!!")
             pass
         # have room can go
@@ -64,7 +67,7 @@ while game_on:
             current_location = current_location.n_to
     if direction == 's':
         # if no more room:
-        if current_location.name == 'Outside Cave Entrance':
+        if current_location.s_to is None:
             print("!!!!no more room this way!!!!")
             pass
         # have room can go
@@ -72,7 +75,7 @@ while game_on:
             current_location = current_location.s_to
     if direction == 'e':
         # if no more room:
-        if current_location.name == 'Narrow Passage' or current_location.name == 'Treasure Chamber' or current_location.name == 'Grand Overlook':
+        if current_location.e_to is None:
             print("!!!!no more room this way!!!!")
             pass
         # have room can go
@@ -80,12 +83,13 @@ while game_on:
             current_location = current_location.e_to
     if direction == 'w':
         # if no more room:
-        if current_location.name == 'Outside Cave Entrance' or current_location.name == 'Foyer' or current_location.name == 'Grand Overlook':
+        if current_location.w_to is None:
             print("!!!!no more room this way!!!!")
             pass
         # have room can go
         else:
             current_location = current_location.w_to
+
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
 #
