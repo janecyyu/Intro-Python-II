@@ -72,12 +72,20 @@ while game_on:
             current_location = current_location.s_to
     if direction == 'e':
         # if no more room:
-        if current_location.name == 'Narrow Passage' or current_location.name == 'Treasure Chamber':
+        if current_location.name == 'Narrow Passage' or current_location.name == 'Treasure Chamber' or current_location.name == 'Grand Overlook':
             print("!!!!no more room this way!!!!")
             pass
         # have room can go
         else:
             current_location = current_location.e_to
+    if direction == 'w':
+        # if no more room:
+        if current_location.name == 'Outside Cave Entrance' or current_location.name == 'Foyer' or current_location.name == 'Grand Overlook':
+            print("!!!!no more room this way!!!!")
+            pass
+        # have room can go
+        else:
+            current_location = current_location.w_to
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
 #

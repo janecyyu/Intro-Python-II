@@ -12,11 +12,11 @@ class Room:
     def n_to(self, n_to):
         return self.n_to
 
-    def south(self, s_to):
+    def s_to(self, s_to):
         return self.s_to
 
-    def w(self, w_to):
+    def w_to(self, w_to):
         return self.w_to
 
-    def e(self, e_to):
+    def e_to(self, e_to):
         return self.e_to
