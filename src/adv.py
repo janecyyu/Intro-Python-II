@@ -1,27 +1,28 @@
 from room import Room
 from player import Player
 import textwrap
+from item import Item
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", Item("Chihuahua", "She is smiling..")),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", Item("TV", "It's playing news.")),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""", Item(
+        "Face Mask", "Wearing it can prevent virus")),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", Item("Bee", "but it's friendly")),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""", Item("Teddy Bear", "It's pink!")),
 }
-
 
 # Link rooms together
 
@@ -49,9 +50,12 @@ while game_on:
     # # * Prints the current description (the textwrap module might be useful here).
     # # Wrap this text.
     if current_location is not None:
-        wrapper = textwrap.TextWrapper(width=20)
+        wrapper = textwrap.TextWrapper()
         word_list = wrapper.wrap(text=current_location.description)
         print(word_list)
+    # print items
+    print(f"\n{current_location.item}")
+    print("\N{grinning face}")
     # * Waits for user input and decides what to do.
     direction = input("\nselect a direction: ")
     direction = direction.lower()
@@ -65,7 +69,8 @@ while game_on:
         # have room can go
         else:
             current_location = current_location.n_to
-    if direction == 's':
+
+    elif direction == 's':
         # if no more room:
         if current_location.s_to is None:
             print("!!!!no more room this way!!!!")
@@ -73,7 +78,7 @@ while game_on:
         # have room can go
         else:
             current_location = current_location.s_to
-    if direction == 'e':
+    elif direction == 'e':
         # if no more room:
         if current_location.e_to is None:
             print("!!!!no more room this way!!!!")
@@ -81,7 +86,7 @@ while game_on:
         # have room can go
         else:
             current_location = current_location.e_to
-    if direction == 'w':
+    elif direction == 'w':
         # if no more room:
         if current_location.w_to is None:
             print("!!!!no more room this way!!!!")
@@ -89,8 +94,9 @@ while game_on:
         # have room can go
         else:
             current_location = current_location.w_to
-    if direction == 'q':
+    elif direction == 'q':
         game_on = False
+
     else:
         print("I don't know what this means. Try again please!")
 
