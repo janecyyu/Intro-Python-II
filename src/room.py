@@ -17,5 +17,10 @@ class Room:
         output = f'{self.name,self.description}'
         return output
 
+    def print_items(self):
+        print("\n⬇️ ⬇️ ⬇️ You got this ⬇️ ⬇️ ⬇️")
+        for i in self.items:
+            print(i)
+
     def add_item(self, new_item):
         self.items.append(new_item)

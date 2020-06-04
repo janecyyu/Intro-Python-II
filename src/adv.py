@@ -6,22 +6,23 @@ from item import Item
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", [Item("Chihuahua", "She is smiling..")]),
+                     "North of you, the cave mount beckons", [Item("Chihuahua", "She is smiling..🐶")]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east.""", [Item("TV", "It's playing news.")]),
+passages run north and east.""", [Item("TV", "It's playing news..📺")]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
 the distance, but there is no way across the chasm.""", [Item(
-        "Face Mask", "Wearing it can prevent virus")]),
+        "Face Mask", "Wearing it can prevent virus!😷"), Item(
+        "Apple", "An apple a day, keep the doctor away!🍎")]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", [Item("Bee", "but it's friendly")]),
+to north. The smell of gold permeates the air.""", [Item("Bee", "but it's friendly..🐝"), Item("Honey", "Yum yum!🍯")]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""", [Item("Teddy Bear", "It's pink!")]),
+earlier adventurers. The only exit is to the south.""", [Item("Teddy Bear", "So cute!🐻")]),
 }
 
 # Link rooms together
@@ -54,8 +55,7 @@ while game_on:
         word_list = wrapper.wrap(text=current_location.description)
         print(word_list)
     # print items
-    print(f"\n{current_location.item}")
-    print("\N{grinning face}")
+    current_location.print_items()
     # * Waits for user input and decides what to do.
     direction = input("\nselect a direction: ")
     direction = direction.lower()
@@ -98,7 +98,7 @@ while game_on:
         game_on = False
 
     else:
-        print("I don't know what this means. Try again please!")
+        print("❓I don't know what this means. Try again please!❓")
 
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
