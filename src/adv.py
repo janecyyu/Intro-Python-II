@@ -9,20 +9,14 @@ room = {
                      "North of you, the cave mount beckons", [Item("Chihuahua", "She is smiling..🐶")]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east.""", [Item("TV", "It's playing news..📺")]),
+    passages run north and east.""", [Item("TV", "It's playing news..📺")]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
-into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm.""", [Item(
-        "Face Mask", "Wearing it can prevent virus!😷"), Item(
-        "Apple", "An apple a day, keep the doctor away!🍎")]),
+    into the darkness. Ahead to the north, a light flickers in the distance, but there is no way across the chasm.""", [Item("Face Mask", "Wearing it can prevent virus!😷"), Item("Apple", "An apple a day, keep the doctor away!🍎")]),
 
-    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", [Item("Bee", "but it's friendly..🐝"), Item("Honey", "Yum yum!🍯")]),
+    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west to north. The smell of gold permeates the air.""", [Item("Bee", "but it's friendly..🐝"), Item("Honey", "Yum yum!🍯")]),
 
-    'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
-chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""", [Item("Teddy Bear", "So cute!🐻")]),
+    'treasure': Room("Treasure Chamber", """You've found the long-lost treasure chamber! Sadly, it has already been completely emptied by earlier adventurers. The only exit is to the south.""", [Item("Teddy Bear", "So cute!🐻")]),
 }
 
 # Link rooms together
@@ -36,9 +30,15 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+
+def no_outlet():
+    print("🙅‍!!!!no more room this way!!!!🙅")
+    pass
+
 #
 # Main
 #
+
 
 # Make a new player object that is currently in the 'outside' room.
 player = Player("Tom", room['outside'])
@@ -57,15 +57,14 @@ while game_on:
     # print items
     current_location.print_items()
     # * Waits for user input and decides what to do.
-    direction = input("\nselect a direction: ")
+    direction = input("\nselect a direction - n, e, w, s: ")
     direction = direction.lower()
     direction = direction[0]
     # if direction == 'north'
     if direction == 'n':
         # if no more room:
         if current_location.n_to is None:
-            print("!!!!no more room this way!!!!")
-            pass
+            no_outlet()
         # have room can go
         else:
             current_location = current_location.n_to
@@ -73,25 +72,19 @@ while game_on:
     elif direction == 's':
         # if no more room:
         if current_location.s_to is None:
-            print("!!!!no more room this way!!!!")
-            pass
-        # have room can go
+            no_outlet()
         else:
             current_location = current_location.s_to
     elif direction == 'e':
         # if no more room:
         if current_location.e_to is None:
-            print("!!!!no more room this way!!!!")
-            pass
-        # have room can go
+            no_outlet()
         else:
             current_location = current_location.e_to
     elif direction == 'w':
         # if no more room:
         if current_location.w_to is None:
-            print("!!!!no more room this way!!!!")
-            pass
-        # have room can go
+            no_outlet()
         else:
             current_location = current_location.w_to
     elif direction == 'q':
