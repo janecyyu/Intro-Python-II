@@ -49,7 +49,7 @@ while game_on:
     # # * Prints the current description (the textwrap module might be useful here).
     # # Wrap this text.
     if current_location is not None:
-        wrapper = textwrap.TextWrapper(width=100)
+        wrapper = textwrap.TextWrapper(width=20)
         word_list = wrapper.wrap(text=current_location.description)
         print(word_list)
     # * Waits for user input and decides what to do.
