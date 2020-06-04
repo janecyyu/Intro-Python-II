@@ -6,22 +6,22 @@ from item import Item
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", Item("Chihuahua", "She is smiling..")),
+                     "North of you, the cave mount beckons", [Item("Chihuahua", "She is smiling..")]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east.""", Item("TV", "It's playing news.")),
+passages run north and east.""", [Item("TV", "It's playing news.")]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm.""", Item(
-        "Face Mask", "Wearing it can prevent virus")),
+the distance, but there is no way across the chasm.""", [Item(
+        "Face Mask", "Wearing it can prevent virus")]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", Item("Bee", "but it's friendly")),
+to north. The smell of gold permeates the air.""", [Item("Bee", "but it's friendly")]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""", Item("Teddy Bear", "It's pink!")),
+earlier adventurers. The only exit is to the south.""", [Item("Teddy Bear", "It's pink!")]),
 }
 
 # Link rooms together
