@@ -6,7 +6,7 @@ from item import Item
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", [Item("Chihuahua", "She is smiling..🐶")]),
+                     "North of you, the cave mount beckons", [Item("Chihuahua puppy", "Aww~ She is smiling..🐶")]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
     passages run north and east.""", [Item("TV", "It's playing news..📺")]),
@@ -41,21 +41,21 @@ def no_outlet():
 
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player("Tom", room['outside'])
-current_location = player.current_room
+player = Player("Tom", room['outside'], [])
+current_room = player.current_room
 game_on = True
 # Write a loop that:
 while game_on:
     # * Prints the current room name
-    print(f"\n{player.name}, you are at {current_location.name}")
+    print(f"\n{player.name}, you are at {current_room.name}")
     # # * Prints the current description (the textwrap module might be useful here).
     # # Wrap this text.
-    if current_location is not None:
+    if current_room is not None:
         wrapper = textwrap.TextWrapper()
-        word_list = wrapper.wrap(text=current_location.description)
+        word_list = wrapper.wrap(text=current_room.description)
         print(word_list)
     # print items
-    current_location.print_items()
+    current_room.print_items(player)
     # * Waits for user input and decides what to do.
     direction = input("\nselect a direction - n, e, w, s: ")
     direction = direction.lower()
@@ -63,30 +63,30 @@ while game_on:
     # if direction == 'north'
     if direction == 'n':
         # if no more room:
-        if current_location.n_to is None:
+        if current_room.n_to is None:
             no_outlet()
         # have room can go
         else:
-            current_location = current_location.n_to
+            current_room = current_room.n_to
 
     elif direction == 's':
         # if no more room:
-        if current_location.s_to is None:
+        if current_room.s_to is None:
             no_outlet()
         else:
-            current_location = current_location.s_to
+            current_room = current_room.s_to
     elif direction == 'e':
         # if no more room:
-        if current_location.e_to is None:
+        if current_room.e_to is None:
             no_outlet()
         else:
-            current_location = current_location.e_to
+            current_room = current_room.e_to
     elif direction == 'w':
         # if no more room:
-        if current_location.w_to is None:
+        if current_room.w_to is None:
             no_outlet()
         else:
-            current_location = current_location.w_to
+            current_room = current_room.w_to
     elif direction == 'q':
         game_on = False
 

@@ -11,4 +11,4 @@ class Item:
         self.item_description = item_description
 
     def __str__(self):
-        return f"You found a(n) {self.item_name}: {self.item_description}"
+        return f"a(n) {self.item_name}: {self.item_description}"

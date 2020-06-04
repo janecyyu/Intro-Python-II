@@ -1,6 +1,7 @@
 # Implement a class to hold room information. This should have name and
 # description attributes.
 from item import Item
+from player import Player
 
 
 class Room:
@@ -17,10 +18,15 @@ class Room:
         output = f'{self.name,self.description}'
         return output
 
-    def print_items(self):
-        print("\n⬇️ ⬇️ ⬇️ You got this ⬇️ ⬇️ ⬇️")
-        for i in self.items:
-            print(i)
+    def print_items(self, player):
+        print("\n⬇️ ⬇️ ⬇️ You found this ⬇️ ⬇️ ⬇️")
+        for item in self.items:
+            print(item)
+            take = input("take it?")
+
+            if take == 'take' or take == 'get':
+                player.add_to_bag(item)
+                print(f'Ok, you take this "{item.item_name}"!')
 
     def add_item(self, new_item):
         self.items.append(new_item)
