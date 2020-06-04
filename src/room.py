@@ -28,7 +28,7 @@ class Room:
                 if take == 'take' or take == 'get':
                     player.add_to_bag(item)
                     self.remove_item(item)
-                    print(f'Ok, you take this "{item.item_name}"!')
+                    return print(f'Ok, you have picked up this "{item.item_name}"!')
                 if take == "no":
                     pass
         else:
