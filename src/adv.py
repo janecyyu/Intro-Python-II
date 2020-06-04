@@ -45,7 +45,7 @@ game_on = True
 # Write a loop that:
 while game_on:
     # * Prints the current room name
-    print(f"{player.name}, you are at {current_location.name}")
+    print(f"\n{player.name}, you are at {current_location.name}")
     # # * Prints the current description (the textwrap module might be useful here).
     # # Wrap this text.
     if current_location is not None:
@@ -53,7 +53,7 @@ while game_on:
         word_list = wrapper.wrap(text=current_location.description)
         print(word_list)
     # * Waits for user input and decides what to do.
-    direction = input("select a direction: ")
+    direction = input("\nselect a direction: ")
     direction = direction.lower()
     direction = direction[0]
     # if direction == 'north'
@@ -89,6 +89,10 @@ while game_on:
         # have room can go
         else:
             current_location = current_location.w_to
+    if direction == 'q':
+        game_on = False
+    else:
+        print("I don't know what this means. Try again please!")
 
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
