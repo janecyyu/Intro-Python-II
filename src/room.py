@@ -19,11 +19,9 @@ class Room:
         return output
 
     def print_items(self, player):
-        print("\n⬇️ ⬇️ ⬇️ You found this ⬇️ ⬇️ ⬇️")
         if len(self.items) is not 0:
+            print("\n⬇️ ⬇️ ⬇️ Look!!! ⬇️ ⬇️ ⬇️")
             self.on_take(player)
-        else:
-            print("Sorry, It's empty..")
 
     def add_item(self, new_item):
         self.items.append(new_item)
@@ -34,11 +32,16 @@ class Room:
     def on_take(self, player):
         for item in self.items:
             print(item)
-            take = input("take it?")
+            take = input("take or no?")
 
             if take == 'take' or take == 'get':
                 player.add_to_bag(item)
                 self.remove_item(item)
-                return print(f'Ok, you have picked up this "{item.item_name}"!')
-            if take == "no":
+                print(f'Ok, you have picked up this "{item.item_name}"!')
+            elif take == "no":
                 pass
+            else:
+                print("❓I don't know this.. ❓")
+
+    def on_drop(self, player):
+        player.remove_from_bag()

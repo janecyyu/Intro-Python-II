@@ -6,13 +6,11 @@ from item import Item
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", [Item("Chihuahua puppy", "Aww~ She is smiling..🐶")]),
+                     "North of you, the cave mount beckons", []),
 
-    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-    passages run north and east.""", [Item("TV", "It's playing news..📺")]),
+    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty passages run north and east.""", [Item("TV", "It's playing news..📺")]),
 
-    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
-    into the darkness. Ahead to the north, a light flickers in the distance, but there is no way across the chasm.""", [Item("Face Mask", "Wearing it can prevent virus!😷"), Item("Apple", "An apple a day, keep the doctor away!🍎")]),
+    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling into the darkness. Ahead to the north, a light flickers in the distance, but there is no way across the chasm.""", [Item("Face Mask", "Wearing it can prevent virus!😷"), Item("Apple", "An apple a day, keep the doctor away!🍎")]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west to north. The smell of gold permeates the air.""", [Item("Bee", "but it's friendly..🐝"), Item("Honey", "Yum yum!🍯")]),
 
@@ -55,7 +53,8 @@ while game_on:
         word_list = wrapper.wrap(text=current_room.description)
         print(word_list)
     # print items
-    current_room.print_items(player)
+    if current_room is not room['outside']:
+        current_room.print_items(player)
     # * Waits for user input and decides what to do.
     direction = input("\nselect a direction - n, e, w, s: ")
     direction = direction.lower()
@@ -87,6 +86,11 @@ while game_on:
             no_outlet()
         else:
             current_room = current_room.w_to
+    elif direction == "i" or direction == "inventory":
+        # print items in user's bag:
+        print("Here are what I got:")
+        player.print_bag()
+
     elif direction == 'q':
         game_on = False
 

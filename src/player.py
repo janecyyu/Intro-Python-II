@@ -8,7 +8,10 @@ class Player:
 
     def print_bag(self):
         for i in self.bag:
-            print(i)
+            print("I got: " + i.item_name)
 
     def add_to_bag(self, item):
         self.bag.append(item)
+
+    def remove_from_bag(self, item):
+        self.bag.remove(item)
