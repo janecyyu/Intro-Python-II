@@ -56,7 +56,7 @@ while game_on:
     if current_room is not room['outside']:
         current_room.print_items(player)
     # * Waits for user input and decides what to do.
-    direction = input("\nselect a direction - n, e, w, s: ")
+    direction = input("\nselect an action - n, e, w, s, q or i: ")
     direction = direction.lower()
     direction = direction[0]
     # if direction == 'north'
@@ -86,10 +86,22 @@ while game_on:
             no_outlet()
         else:
             current_room = current_room.w_to
-    elif direction == "i" or direction == "inventory":
+    elif direction == "i":
         # print items in user's bag:
-        print("Here are what I got:")
+        print("Check my bag:")
         player.print_bag()
+        drop_it = input(
+            "\nWould you like to drop something? If yes, enter the name of item: ")
+        if drop_it == "no":
+            pass
+        elif (drop_it in sublist for sublist in player.bag):
+            for item in player.bag:
+                if(item.item_name == drop_it):
+                    current_room.add_item(item)
+                    player.remove_from_bag(item)
+            print(f"You have dropped the {drop_it}!")
+        else:
+            print("❓Sorry, I don't know what this means..❓")
 
     elif direction == 'q':
         game_on = False
